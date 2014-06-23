@@ -10,127 +10,112 @@ using MVCMusicStore.Models;
 
 namespace MVCMusicStore.Controllers
 {
-    public class AlbumsController : Controller
+    public class ReviewsController : Controller
     {
         private StoreContext db = new StoreContext();
 
-		public ActionResult DisplayByArtist(int artistID)
-		{
-			// imagine code here!!
-			return View();
-		}
-
-        // GET: Albums
-		[Route("Albums/All")]
+        // GET: Reviews
         public ActionResult Index()
         {
-            // Let's get the model
-			var albums = db.Albums.ToList();
-
-			// combine the model with the view and return
-			return View(albums);
+            var reviews = db.Reviews.Include(r => r.Album);
+            return View(reviews.ToList());
         }
 
-        public ActionResult AlbumWithReviews(int id)
-        {
-            return View();
-        }
-
-        // GET: Albums/Details/5
-		[Route("Album/{id:int}")]
+        // GET: Reviews/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
-            if (album == null)
+            Review review = db.Reviews.Find(id);
+            if (review == null)
             {
                 return HttpNotFound();
             }
-            return View(album);
+            return View(review);
         }
 
-        // GET: Albums/Create
-		// Automatically uses get
-		// This displays the form to the user
-		//[Authorize()]
+        // GET: Reviews/Create
         public ActionResult Create()
         {
+            ViewBag.AlbumID = new SelectList(db.Albums, "AlbumID", "Title");
             return View();
         }
 
-        // POST: Albums/Create
+        // POST: Reviews/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-		// Accepts the input from the user
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Album album)
+        public ActionResult Create(Review review)
         {
-			if (ModelState.IsValid) {
-				db.Albums.Add(album);
-				db.SaveChanges();
-				return RedirectToAction("Index");
-			}
+            if (ModelState.IsValid)
+            {
+                db.Reviews.Add(review);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-            return View(album);
+            ViewBag.AlbumID = new SelectList(db.Albums, "AlbumID", "Title", review.AlbumID);
+            return View(review);
         }
 
-        // GET: Albums/Edit/5
+        // GET: Reviews/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
-            if (album == null)
+            Review review = db.Reviews.Find(id);
+            if (review == null)
             {
                 return HttpNotFound();
             }
-            return View(album);
+            ViewBag.AlbumID = new SelectList(db.Albums, "AlbumID", "Title", review.AlbumID);
+            return View(review);
         }
 
-        // POST: Albums/Edit/5
+        // POST: Reviews/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AlbumID,Title")] Album album)
+        public ActionResult Edit([Bind(Include = "ReviewID,AlbumID,Contents,ReviewerEmail")] Review review)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(album).State = EntityState.Modified;
+                db.Entry(review).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(album);
+            ViewBag.AlbumID = new SelectList(db.Albums, "AlbumID", "Title", review.AlbumID);
+            return View(review);
         }
 
-        // GET: Albums/Delete/5
+        // GET: Reviews/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
-            if (album == null)
+            Review review = db.Reviews.Find(id);
+            if (review == null)
             {
                 return HttpNotFound();
             }
-            return View(album);
+            return View(review);
         }
 
-        // POST: Albums/Delete/5
+        // POST: Reviews/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Album album = db.Albums.Find(id);
-            db.Albums.Remove(album);
+            Review review = db.Reviews.Find(id);
+            db.Reviews.Remove(review);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
