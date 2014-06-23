@@ -14,14 +14,8 @@ namespace MVCMusicStore.Controllers
     {
         private StoreContext db = new StoreContext();
 
-		public ActionResult DisplayByArtist(int artistID)
-		{
-			// imagine code here!!
-			return View();
-		}
-
         // GET: Albums
-		[Route("Albums/All")]
+		//[Route("Albums/All")]
         public ActionResult Index()
         {
             // Let's get the model

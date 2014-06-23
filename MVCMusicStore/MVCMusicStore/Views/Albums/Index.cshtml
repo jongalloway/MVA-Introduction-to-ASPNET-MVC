@@ -20,7 +20,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @Html.DisplayFor(wibble => item.Title)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AlbumID }) |
