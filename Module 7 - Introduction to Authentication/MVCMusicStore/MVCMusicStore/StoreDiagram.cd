@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MVCMusicStore.Models.Album">
+    <Position X="4" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAACAAAAAAIAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Models\Album.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MVCMusicStore.Models.Artist">
+    <Position X="6.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAACBAAAAA=</HashCode>
+      <FileName>Models\Artist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MVCMusicStore.Models.Review">
+    <Position X="1.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAABAAAAABAAAACABAAAA=</HashCode>
+      <FileName>Models\Review.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
