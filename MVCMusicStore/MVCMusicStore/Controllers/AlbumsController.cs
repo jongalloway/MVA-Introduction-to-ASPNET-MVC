@@ -44,7 +44,7 @@ namespace MVCMusicStore.Controllers
         // GET: Albums/Create
 		// Automatically uses get
 		// This displays the form to the user
-		//[Authorize()]
+		[Authorize()]
         public ActionResult Create()
         {
             return View();
